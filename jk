@@ -1,0 +1,21 @@
+# Blockchain for Logistics Transactions
+pragma solidity ^0.8.0;
+
+contract LogisticsChain {
+    struct Shipment {
+        string origin;
+        string destination;
+        uint256 timestamp;
+        bool delivered;
+    }
+
+    mapping(uint256 => Shipment) public shipments;
+
+    function createShipment(uint256 id, string memory origin, string memory destination) public {
+        shipments[id] = Shipment(origin, destination, block.timestamp, false);
+    }
+
+    function markDelivered(uint256 id) public {
+        shipments[id].delivered = true;
+    }
+}
